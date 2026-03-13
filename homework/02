@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Input 樣式全解析問卷</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; padding: 20px; background-color: #f4f4f9; }
+        form { max-width: 600px; margin: auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .section { margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input[type="text"], input[type="email"], input[type="password"], input[type="tel"], input[type="url"], input[type="number"], select, textarea {
+            width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;
+        }
+        .inline-group { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+        .inline-group input { margin-bottom: 0; width: auto; }
+        button { background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
+        button:hover { background-color: #45a049; }
+    </style>
+</head>
+<body>
+
+    <form action="#" method="post">
+        <h2>🚀 問卷</h2>
+        <p>請填寫以下資訊。</p>
+
+        <div class="section">
+            <label for="name">姓名 (text):</label>
+            <input type="text" id="name" name="name" placeholder="輸入您的姓名" required>
+
+            <label for="email">電子郵件 (email):</label>
+            <input type="email" id="email" name="email" placeholder="example@domain.com">
+
+            <label for="password">密碼 (password):</label>
+            <input type="password" id="password" name="password">
+
+            <label for="phone">電話 (tel):</label>
+            <input type="tel" id="phone" name="phone" placeholder="0912-345-678">
+
+            <label for="website">個人網站 (url):</label>
+            <input type="url" id="website" name="website" placeholder="https://">
+        </div>
+
+        <div class="section">
+            <label>性別 (radio):</label>
+            <div class="inline-group">
+                <input type="radio" id="male" name="gender" value="male"> <label for="male">男</label>
+                <input type="radio" id="female" name="gender" value="female"> <label for="female">女</label>
+                <input type="radio" id="other" name="gender" value="other"> <label for="other">其他</label>
+            </div>
+
+            <label>興趣愛好 (checkbox):</label>
+            <div class="inline-group">
+                <input type="checkbox" id="coding" name="hobby" value="coding"> <label for="coding">寫程式</label>
+                <input type="checkbox" id="travel" name="hobby" value="travel"> <label for="travel">旅遊</label>
+                <input type="checkbox" id="music" name="hobby" value="music"> <label for="music">音樂</label>
+            </div>
+        </div>
+
+        <div class="section">
+            <label for="age">年齡 (number):</label>
+            <input type="number" id="age" name="age" min="0" max="120" value="25">
+
+            <label for="satisfaction">滿意度評分 (range):</label>
+            <input type="range" id="satisfaction" name="satisfaction" min="0" max="100" step="10">
+            <small>滑動調整 (0-100)</small>
+        </div>
+
+        <div class="section">
+            <label for="birthday">出生日期 (date):</label>
+            <input type="date" id="birthday" name="birthday">
+
+            <label for="appointment">預約時間 (datetime-local):</label>
+            <input type="datetime-local" id="appointment" name="appointment">
+
+            <label for="meeting-month">會議月份 (month):</label>
+            <input type="month" id="meeting-month" name="meeting-month">
+        </div>
+
+        <div class="section">
+            <label for="favcolor">最喜歡的顏色 (color):</label>
+            <input type="color" id="favcolor" name="favcolor" value="#4CAF50" style="height: 50px;">
+
+            <label for="resume">上傳個人照或作品 (file):</label>
+            <input type="file" id="resume" name="resume">
+        </div>
+
+        <div class="section">
+            <label for="search">站內搜尋 (search):</label>
+            <input type="search" id="search" name="search" placeholder="關鍵字...">
+
+            <label for="feedback">詳細反饋 (textarea):</label>
+            <textarea id="feedback" name="feedback" rows="4" placeholder="請告訴我們您的想法..."></textarea>
+        </div>
+
+        <div style="text-align: center;">
+            <input type="reset" value="重設表單" style="margin-right: 10px;">
+            <button type="submit">提交問卷 (submit)</button>
+        </div>
+    </form>
+
+</body>
+</html>
+
