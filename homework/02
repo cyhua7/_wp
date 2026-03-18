@@ -1,4 +1,4 @@
-<!D<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
@@ -11,6 +11,7 @@
             padding: 20px;
             line-height: 1.6;
         }
+        /*表單外框*/
         .container {
             max-width: 600px;
             background: #fff;
@@ -23,6 +24,7 @@
             text-align: center;
             color: #333;
         }
+        /*每一組輸入欄位的間距*/
         .form-group {
             margin-bottom: 15px;
         }
@@ -31,6 +33,7 @@
             margin-bottom: 5px;
             font-weight: bold;
         }
+        /*針對多種輸入類型統一寬度與內距*/
         input[type="text"],
         input[type="email"],
         input[type="tel"],
@@ -43,6 +46,7 @@
             border-radius: 4px;
             box-sizing: border-box; /* 確保寬度包含 padding */
         }
+        /*單選與多選的排版*/
         .radio-group, .checkbox-group {
             display: flex;
             gap: 15px;
@@ -51,12 +55,14 @@
         .radio-group input, .checkbox-group input {
             margin-right: 5px;
         }
+        /*顏色選取器的尺寸*/
         input[type="color"] {
             height: 40px;
             width: 100px;
             border: none;
             cursor: pointer;
         }
+        /*提交問卷按鈕樣式*/
         button {
             width: 100%;
             padding: 12px;
@@ -76,24 +82,28 @@
 <body>
 
 <div class="container">
-    <h2>用戶資訊與興趣調查</h2>
+    <h2>用戶資訊調查問卷</h2>
     <form action="/submit_form" method="post">
         
+        <!-- 姓名文字輸入 --> 
         <div class="form-group">
             <label for="name">姓名：</label>
             <input type="text" id="name" name="user_name" placeholder="請輸入真實姓名" required>
         </div>
 
+        <!-- 電子郵件 -->
         <div class="form-group">
             <label for="email">電子郵件：</label>
             <input type="email" id="email" name="user_email" placeholder="example@mail.com" required>
         </div>
 
+        <!-- 連絡電話 -->
         <div class="form-group">
             <label for="phone">電話：</label>
             <input type="tel" id="phone" name="user_phone" placeholder="0912-345-678">
         </div>
 
+        <!-- 性別單選 -->
         <div class="form-group">
             <label>性別：</label>
             <div class="radio-group">
@@ -103,6 +113,7 @@
             </div>
         </div>
 
+        <!-- 職業選單 -->
         <div class="form-group">
             <label for="job">職業：</label>
             <select id="job" name="user_job">
@@ -115,276 +126,35 @@
             </select>
         </div>
 
+        <!-- 日期選擇 -->
         <div class="form-group">
             <label for="birthday">出生日期：</label>
             <input type="date" id="birthday" name="user_birthday">
         </div>
 
+        <!-- 興趣愛好輸入 -->
         <div class="form-group">
             <label for="hobby">興趣愛好：</label>
             <input type="text" id="hobby" name="user_hobby" placeholder="例如：程式開發、閱讀、運動">
         </div>
 
+        <!-- 顏色盤選擇 -->
         <div class="form-group">
             <label for="color">你最喜歡的顏色：</label>
             <input type="color" id="color" name="fav_color" value="#28a745">
         </div>
 
+        <!-- 留言文字輸入 -->
         <div class="form-group">
             <label for="message">留言：</label>
             <textarea id="message" name="user_message" rows="4" placeholder="請輸入您的建議或想法..."></textarea>
         </div>
 
+        <!-- 提交問卷按鈕 -->
         <button type="submit">提交問卷</button>
         
     </form>
 </div>
-
-</body>
-</html>OCTYPE html>
-<html la<!DOCTYPE html>
-<html lang="zh-Hant">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>綜合問卷調查表</title>
-    <style>
-        body {
-            font-family: "Microsoft JhengHei", Arial, sans-serif;
-            background-color: #f4f7f6;
-            padding: 20px;
-            line-height: 1.6;
-        }
-        .container {
-            max-width: 600px;
-            background: #fff;
-            margin: auto;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        h2 {
-            text-align: center;
-            color: #333;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        input[type="text"],
-        input[type="email"],
-        input[type="tel"],
-        input[type="date"],
-        select,
-        textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box; /* 確保寬度包含 padding */
-        }
-        .radio-group, .checkbox-group {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-        .radio-group input, .checkbox-group input {
-            margin-right: 5px;
-        }
-        input[type="color"] {
-            height: 40px;
-            width: 100px;
-            border: none;
-            cursor: pointer;
-        }
-        button {
-            width: 100%;
-            padding: 12px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-        button:hover {
-            background-color: #218838;
-        }
-    </style>
-</head>
-<body>
-
-<div class="container">
-    <h2>用戶資訊與興趣調查</h2>
-    <form action="/submit_form" method="post">
-        
-        <div class="form-group">
-            <label for="name">姓名：</label>
-            <input type="text" id="name" name="user_name" placeholder="請輸入真實姓名" required>
-        </div>
-
-        <div class="form-group">
-            <label for="email">電子郵件：</label>
-            <input type="email" id="email" name="user_email" placeholder="example@mail.com" required>
-        </div>
-
-        <div class="form-group">
-            <label for="phone">電話：</label>
-            <input type="tel" id="phone" name="user_phone" placeholder="0912-345-678">
-        </div>
-
-        <div class="form-group">
-            <label>性別：</label>
-            <div class="radio-group">
-                <label><input type="radio" name="gender" value="male"> 男</label>
-                <label><input type="radio" name="gender" value="female"> 女</label>
-                <label><input type="radio" name="gender" value="other"> 其他</label>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="job">職業：</label>
-            <select id="job" name="user_job">
-                <option value="">請選擇職業</option>
-                <option value="student">學生 / 研究人員</option>
-                <option value="engineer">工程師</option>
-                <option value="design">設計師</option>
-                <option value="business">商業管理</option>
-                <option value="other">其他</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="birthday">出生日期：</label>
-            <input type="date" id="birthday" name="user_birthday">
-        </div>
-
-        <div class="form-group">
-            <label for="hobby">興趣愛好：</label>
-            <input type="text" id="hobby" name="user_hobby" placeholder="例如：程式開發、閱讀、運動">
-        </div>
-
-        <div class="form-group">
-            <label for="color">你最喜歡的顏色：</label>
-            <input type="color" id="color" name="fav_color" value="#28a745">
-        </div>
-
-        <div class="form-group">
-            <label for="message">留言：</label>
-            <textarea id="message" name="user_message" rows="4" placeholder="請輸入您的建議或想法..."></textarea>
-        </div>
-
-        <button type="submit">提交問卷</button>
-        
-    </form>
-</div>
-
-</body>
-</html>ng="zh-Hant">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTML Input 樣式全解析問卷</title>
-    <style>
-        body { font-family: sans-serif; line-height: 1.6; padding: 20px; background-color: #f4f4f9; }
-        form { max-width: 600px; margin: auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .section { margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; font-weight: bold; }
-        input[type="text"], input[type="email"], input[type="password"], input[type="tel"], input[type="url"], input[type="number"], select, textarea {
-            width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;
-        }
-        .inline-group { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-        .inline-group input { margin-bottom: 0; width: auto; }
-        button { background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
-        button:hover { background-color: #45a049; }
-    </style>
-</head>
-<body>
-
-    <form action="#" method="post">
-        <h2>🚀 問卷</h2>
-        <p>請填寫以下資訊。</p>
-
-        <div class="section">
-            <label for="name">姓名 (text):</label>
-            <input type="text" id="name" name="name" placeholder="輸入您的姓名" required>
-
-            <label for="email">電子郵件 (email):</label>
-            <input type="email" id="email" name="email" placeholder="example@domain.com">
-
-            <label for="password">密碼 (password):</label>
-            <input type="password" id="password" name="password">
-
-            <label for="phone">電話 (tel):</label>
-            <input type="tel" id="phone" name="phone" placeholder="0912-345-678">
-
-            <label for="website">個人網站 (url):</label>
-            <input type="url" id="website" name="website" placeholder="https://">
-        </div>
-
-        <div class="section">
-            <label>性別 (radio):</label>
-            <div class="inline-group">
-                <input type="radio" id="male" name="gender" value="male"> <label for="male">男</label>
-                <input type="radio" id="female" name="gender" value="female"> <label for="female">女</label>
-                <input type="radio" id="other" name="gender" value="other"> <label for="other">其他</label>
-            </div>
-
-            <label>興趣愛好 (checkbox):</label>
-            <div class="inline-group">
-                <input type="checkbox" id="coding" name="hobby" value="coding"> <label for="coding">寫程式</label>
-                <input type="checkbox" id="travel" name="hobby" value="travel"> <label for="travel">旅遊</label>
-                <input type="checkbox" id="music" name="hobby" value="music"> <label for="music">音樂</label>
-            </div>
-        </div>
-
-        <div class="section">
-            <label for="age">年齡 (number):</label>
-            <input type="number" id="age" name="age" min="0" max="120" value="25">
-
-            <label for="satisfaction">滿意度評分 (range):</label>
-            <input type="range" id="satisfaction" name="satisfaction" min="0" max="100" step="10">
-            <small>滑動調整 (0-100)</small>
-        </div>
-
-        <div class="section">
-            <label for="birthday">出生日期 (date):</label>
-            <input type="date" id="birthday" name="birthday">
-
-            <label for="appointment">預約時間 (datetime-local):</label>
-            <input type="datetime-local" id="appointment" name="appointment">
-
-            <label for="meeting-month">會議月份 (month):</label>
-            <input type="month" id="meeting-month" name="meeting-month">
-        </div>
-
-        <div class="section">
-            <label for="favcolor">最喜歡的顏色 (color):</label>
-            <input type="color" id="favcolor" name="favcolor" value="#4CAF50" style="height: 50px;">
-
-            <label for="resume">上傳個人照或作品 (file):</label>
-            <input type="file" id="resume" name="resume">
-        </div>
-
-        <div class="section">
-            <label for="search">站內搜尋 (search):</label>
-            <input type="search" id="search" name="search" placeholder="關鍵字...">
-
-            <label for="feedback">詳細反饋 (textarea):</label>
-            <textarea id="feedback" name="feedback" rows="4" placeholder="請告訴我們您的想法..."></textarea>
-        </div>
-
-        <div style="text-align: center;">
-            <input type="reset" value="重設表單" style="margin-right: 10px;">
-            <button type="submit">提交問卷 (submit)</button>
-        </div>
-    </form>
 
 </body>
 </html>
-
