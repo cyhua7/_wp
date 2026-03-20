@@ -7,6 +7,12 @@ AI問答 -- https://gemini.google.com/share/1bfabe2af49b
 PS C:\cyh\_wp\homework\04> node 01_if_function.js
 B
 ....
+PS C:\cyh\_wp\homework\04> node 02_for_function.js
+55
+....
+PS C:\cyh\_wp\homework\04> node 03_while_array.js
+找到數字 9 在索引 3
+....
 
 ## 摘要
 這是一份精心設計的 JavaScript 基礎綜合練習題，每題都結合了你要求的技術點（`if`, `for`, `while`, `function`, `json`, `array`, `object`），並附上詳細解答與邏輯說明。
