@@ -19,6 +19,9 @@ PS C:\cyh\_wp\homework\04> node 04_object.js
 PS C:\cyh\_wp\homework\04> node 05_json_object.js
 帳號啟用中
 ....
+PS C:\cyh\_wp\homework\04> node 06_array_for_if.js
+[ 12, 130, 44 ]
+....
 
 ## 摘要
 這是一份精心設計的 JavaScript 基礎綜合練習題，每題都結合了你要求的技術點（`if`, `for`, `while`, `function`, `json`, `array`, `object`），並附上詳細解答與邏輯說明。
