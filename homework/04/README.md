@@ -31,6 +31,9 @@ PS C:\cyh\_wp\homework\04> node 08_json.js
 PS C:\cyh\_wp\homework\04> node 09_array_for.js
 21
 ....
+PS C:\cyh\_wp\homework\04> node 10_object.js
+提款成功，餘額：600
+餘額不足
 
 ## 摘要
 這是一份精心設計的 JavaScript 基礎綜合練習題，每題都結合了你要求的技術點（`if`, `for`, `while`, `function`, `json`, `array`, `object`），並附上詳細解答與邏輯說明。
