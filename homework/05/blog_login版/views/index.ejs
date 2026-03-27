@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Blog</title>
+  <style>
+    body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+    h1 { border-bottom: 2px solid #333; padding-bottom: 10px; }
+    .post { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+    .post h2 { margin-top: 0; }
+    .post-meta { color: #666; font-size: 0.9em; }
+    .btn { padding: 5px 10px; text-decoration: none; background: #007bff; color: white; border-radius: 3px; }
+    .btn-danger { background: #dc3545; }
+    .btn-secondary { background: #6c757d; }
+    .new-post { margin-bottom: 20px; }
+  </style>
+</head>
+<body>
+  <h1>Simple Blog</h1>
+  <% if (user) { %>
+    <p>Welcome, <strong><%= user.username %></strong>! <a href="/logout">Logout</a></p>
+  <% } else { %>
+    <p><a href="/login">Login</a> | <a href="/register">Register</a></p>
+  <% } %>
+  <% if (user) { %>
+    <a href="/new" class="btn new-post">New Post</a>
+  <% } %>
+  <% posts.forEach(post => { %>
+    <div class="post">
+      <h2><%= post.title %></h2>
+      <p class="post-meta"><%= new Date(post.created_at).toLocaleString() %></p>
+      <p><%= post.content.substring(0, 100) %><%= post.content.length > 100 ? '...' : '' %></p>
+      <a href="/post/<%= post.id %>" class="btn">Read More</a>
+      <% if (user) { %>
+        <a href="/edit/<%= post.id %>" class="btn btn-secondary">Edit</a>
+        <form action="/posts/<%= post.id %>/delete" method="POST" style="display:inline;">
+          <button type="submit" class="btn btn-danger" onclick="return confirm('Delete this post?')">Delete</button>
+        </form>
+      <% } %>
+    </div>
+  <% }) %>
+  <% if (posts.length === 0) { %>
+    <p>No posts yet. <a href="/new">Create the first one!</a></p>
+  <% } %>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title><%= post.title %></title>
+  <style>
+    body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+    .btn { padding: 5px 10px; text-decoration: none; background: #007bff; color: white; border-radius: 3px; }
+    .btn-secondary { background: #6c757d; }
+    .btn-danger { background: #dc3545; }
+    .post-meta { color: #666; font-size: 0.9em; }
+  </style>
+</head>
+<body>
+  <a href="/">&larr; Back</a>
+  <h1><%= post.title %></h1>
+  <p class="post-meta"><%= new Date(post.created_at).toLocaleString() %></p>
+  <hr>
+  <p><%= post.content %></p>
+  <hr>
+  <a href="/edit/<%= post.id %>" class="btn btn-secondary">Edit</a>
+  <form action="/posts/<%= post.id %>/delete" method="POST" style="display:inline;">
+    <button type="submit" class="btn btn-danger" onclick="return confirm('Delete this post?')">Delete</button>
+  </form>
+</body>
+</html>
