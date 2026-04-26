@@ -1,0 +1,240 @@
+/* 全域設定 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Microsoft JhengHei, sans-serif;
+    background-color: #ffffff;
+    color: #333;
+    line-height: 1.6;
+}
+
+h1 {
+    background: linear-gradient(135deg, #474747 0%, #e8e8e8 100%);
+    color: rgba(254, 254, 254, 0.958);
+    padding: 17px 0;
+    margin-top: 65px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    font-size: 2.3rem;
+}
+
+/* 商品容器：使用 Grid 讓排版更整齊 */
+#product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* 單個商品卡片 */
+.product {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #e1e1e1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* 滑鼠移上去的動畫效果 */
+.product:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+.product h3 {
+    font-size: 1.4rem;
+    color: #000000;
+    margin-bottom: 10px;
+}
+
+.product p {
+    font-size: 1.2rem;
+    color: #000000;
+    font-weight: bold;
+    margin: 15px 0;
+}
+
+/* 按鈕美化 */
+button {
+    background-color: #fbe3f3;
+    color: rgb(61, 61, 61);
+    border: none;
+    padding: 12px 20px;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+button:hover {
+    background-color: #efcee7;
+}
+
+/* 簡單的響應式設計 */
+@media (max-width: 600px) {
+    #product-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 導覽列 */
+.navbar {
+    position: fixed;   /* 👈 關鍵 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* 設為 1000 */
+    /* ... 其他設定 ... */
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: #111827;
+    color: white;
+    padding: 15px 20px;
+    font-size: 1.5rem;
+
+    z-index: 1000;  /* 👈 防止被蓋住 */
+}
+/* 左邊三條 */
+.menu-icon {
+    cursor: pointer;
+}
+
+/* 右邊購物車 */
+.cart-icon {
+    cursor: pointer;
+}
+
+/* 側邊選單 */
+.side-menu {
+    position: fixed;
+    z-index: 2000; /* 必須比 navbar 大！ */
+    /* ... 其他設定 ... */
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background: #1f2937;
+    color: white;
+    padding-top: 60px;
+    transition: 0.3s;
+}
+
+.side-menu a {
+    display: block;
+    padding: 15px;
+    color: white;
+    text-decoration: none;
+}
+
+.side-menu a:hover {
+    background: #374151;
+}
+
+/* 打開時 */
+.side-menu.open {
+    left: 0;
+}
+
+/* 下拉標題 */
+.dropdown-title {
+    padding: 15px;
+    cursor: pointer;
+    background: #1f2937;
+}
+
+/* 子選單 */
+.dropdown-content {
+    display: none;
+    background: #374151;
+}
+
+/* 子項目 */
+.dropdown-content a {
+    padding: 12px 25px;
+    display: block;
+    color: white;
+    text-decoration: none;
+}
+
+/* 滑鼠效果 */
+.dropdown-content a:hover {
+    background: #4b5563;
+}
+
+/* 展開狀態 */
+.dropdown-content.open {
+    display: block;
+}
+
+/* 導覽列右側容器 */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* 帳號選單容器 */
+.account-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.account-icon {
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
+/* 複用你之前的 dropdown-content 樣式，但稍微調整位置 */
+#account-menu {
+    display: none;
+    position: absolute;
+    right: 0; /* 靠右對齊 */
+    background-color: #1f2937;
+    min-width: 120px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    z-index: 1001;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+#account-menu a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 1rem;
+    text-align: center;
+}
+
+#account-menu a:hover {
+    background-color: #374151;
+    border-radius: 8px;
+}
+
+/* 顯示選單的 Class */
+#account-menu.show {
+    display: block;
+}
+
+/* ===== cart 頁專用 ===== */
+#cart-list div {
+    background: white;
+}
+
+#cart-list span {
+    color: black;
+}

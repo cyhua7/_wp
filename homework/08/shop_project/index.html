@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title> 我的商店</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="navbar">
+        <div class="menu-icon" onclick="toggleMenu()">☰</div>
+        <div class="title">我的商店</div>
+        
+        <div class="nav-right">
+            <div class="account-dropdown">
+                <div class="account-icon" onclick="toggleAccountMenu()">👤</div>
+                <div id="account-menu" class="dropdown-content">
+                    <a href="javascript:void(0)" onclick="openModal('register')">註冊</a>
+                    <a href="javascript:void(0)" onclick="openModal('login')">登入</a>
+                    <a href="javascript:void(0)" onclick="handleLogout()">登出</a>
+                </div>
+            </div>
+            <div class="cart-icon" onclick="goToCart()">🛒</div>
+        </div>
+    </div>
+
+    <h1> -Lcsts-</h1>
+
+    <div id="product-list"></div>
+
+    <div id="side-menu" class="side-menu">
+        <a href="javascript:void(0)" onclick="showAll()">首頁</a>
+        <div class="dropdown">
+            <div class="dropdown-title" onclick="toggleCategory()">商品分類 ▾</div>
+            <div id="category-list" class="dropdown-content">
+                <a href="javascript:void(0)" onclick="filterCategory('上半身')">上半身</a>
+                <a href="javascript:void(0)" onclick="filterCategory('配飾')">配飾</a>
+                <a href="javascript:void(0)" onclick="filterCategory('鞋子')">鞋子</a>
+            </div>
+        </div>
+        <a href="#">關於我們</a>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+
+
+</html>
