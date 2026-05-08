@@ -8,42 +8,49 @@ const products = [
         name: "白色 T-shirt",
         price: 300,
         category: "上半身",
-        img: "/T-shirt.jpg"
+        img: "/images/T-shirt.jpg"
     },
     {
         id: 2,
-        name: "潮流帽子",
-        price: 500,
-        category: "配飾",
-        img: "/cap.jpg"
-    },
-    {
-        id: 1,
         name: "黑色 T-shirt",
         price: 300,
         category: "上半身",
-        img: "/T-shirt2.jpg"
-    },
-    {
-        id: 2,
-        name: "項鍊",
-        price: 600,
-        category: "配飾",
-        img: "/necklace.jpg"
+        img: "/images/T-shirt2.jpg"
     },
     {
         id: 3,
+        name: "帽子",
+        price: 500,
+        category: "配飾",
+        img: "/images/cap.jpg"
+    },
+    {
+        id: 4,
+        name: "帽子",
+        price: 500,
+        category: "配飾",
+        img: "/images/cap2.jpg"
+    },
+    {
+        id: 5,
+        name: "項鍊",
+        price: 600,
+        category: "配飾",
+        img: "/images/necklace.jpg"
+    },
+    {
+        id: 6,
         name: "運動鞋",
         price: 2000,
         category: "鞋子",
-        img: "/shoe.jpg"
+        img: "/images/shoe.jpg"
     }
 ];
 
-// 注意：所有的 req 邏輯都必須在 createServer 的大括號內！
+
 const server = http.createServer((req, res) => {
 
-    console.log("收到請求:", req.url); // 這行可以幫你在終端機檢查誰在連線
+    console.log("收到請求:", req.url); 
 
 
 
@@ -61,33 +68,53 @@ const server = http.createServer((req, res) => {
 
     }
 
-    // 處理首頁
+   else if (req.url.startsWith("/images/")) {
+
+        const filePath = path.join(__dirname, "public",req.url);
+
+        console.log("讀取圖片:", filePath);
+        fs.readFile(filePath, (err, data) => {
+
+            if (err) {
+                console.log("找不到圖片:", filePath);
+                res.writeHead(404);
+                return res.end("Not found");
+            }
+            const ext = path.extname(filePath).toLowerCase();
+
+           let type = "image/jpeg";
+            if (ext === ".png") type = "image/png";
+
+            res.writeHead(200, { "Content-Type": type });
+            res.end(data);
+        });
+    }
 
     // 處理首頁
-else if (req.url === "/" || req.url === "/index.html") {
-    fs.readFile(path.join(__dirname, "index.html"), (err, data) => {
-        if (err) {
-            res.writeHead(500);
-            return res.end("Error loading index.html");
-        }
-        // --- 修改這下面這一行 ---
-        res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
-        res.end(data);
-    });
-}
+    else if (req.url === "/" || req.url === "/index.html") {
+        fs.readFile(path.join(__dirname, "index.html"), (err, data) => {
+            if (err) {
+                res.writeHead(500);
+                return res.end("Error loading index.html");
+            }
+        
+            res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+            res.end(data);
+        });
+    }
 
-// server.js 裡面處理購物車請求的部分
-else if (req.url === "/cart.html") {
-    fs.readFile(path.join(__dirname, "cart.html"), (err, data) => {
-        if (err) {
-            res.writeHead(404);
-            return res.end("Cart page not found");
-        }
-        // --- 修改這下面這一行 ---
-        res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
-        res.end(data);
-    });
-}
+    // server.js 裡面處理購物車請求的部分
+    else if (req.url === "/cart.html") {
+        fs.readFile(path.join(__dirname, "cart.html"), (err, data) => {
+            if (err) {
+                res.writeHead(404);
+                return res.end("Cart page not found");
+            }
+            // --- 修改這下面這一行 ---
+            res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+            res.end(data);
+        });
+    }
 
     // 處理 CSS
 
@@ -117,7 +144,11 @@ else if (req.url === "/cart.html") {
 
     }
 
-    else if (req.url.startsWith("/")) {
+    else if (
+        req.url.endsWith(".jpg") ||
+        req.url.endsWith(".png") ||
+        req.url.endsWith(".jpeg")
+    ) {
 
         const filePath = path.join(__dirname, req.url);
 

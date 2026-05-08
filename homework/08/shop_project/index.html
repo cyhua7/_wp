@@ -11,6 +11,7 @@
         <div class="title">我的商店</div>
         
         <div class="nav-right">
+            <div id="user-area"></div>
             <div class="account-dropdown">
                 <div class="account-icon" onclick="toggleAccountMenu()">👤</div>
                 <div id="account-menu" class="dropdown-content">
@@ -41,6 +42,23 @@
     </div>
 
     <script src="script.js"></script>
+
+    <!-- 登入註冊 Modal -->
+    <div id="login-modal" class="modal">
+
+        <div class="modal-box">
+
+            <h2 id="modal-title">登入</h2>
+
+            <input type="text" id="username" placeholder="帳號">
+
+            <input type="password" id="password" placeholder="密碼">
+
+            <button onclick="submitAuth()">送出</button>
+
+        </div>
+
+    </div>
 </body>
 
 

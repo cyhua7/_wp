@@ -97,25 +97,104 @@ function toggleAccountMenu() {
 }
 
 // ===== 模擬登入/註冊 =====
+let currentType = "";
+
+// 打開 Modal
 function openModal(type) {
-    if (type === 'register') {
-        const name = prompt("請輸入註冊姓名：");
-        if (name) alert(`恭喜 ${name} 註冊成功！`);
-    } else if (type === 'login') {
-        const id = prompt("請輸入帳號：");
-        if (id) alert(`歡迎回來，${id}！`);
+
+    currentType = type;
+
+    const modal = document.getElementById("login-modal");
+
+    modal.classList.add("show");
+
+    if (type === "login") {
+        document.getElementById("modal-title").innerText = "登入";
+    }
+
+    else {
+        document.getElementById("modal-title").innerText = "註冊";
     }
 
     document.getElementById("account-menu").classList.remove("show");
 }
 
+// 送出
+function submitAuth() {
+
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+
+    if (!username || !password) {
+        alert("請輸入完整資訊");
+        return;
+    }
+
+    // =====================
+    // 註冊
+    // =====================
+    if (currentType === "register") {
+
+        if (localStorage.getItem(username)) {
+            alert("帳號已存在");
+            return;
+        }
+
+        localStorage.setItem(username, password);
+
+        alert("註冊成功！");
+    }
+
+    // =====================
+    // 登入
+    // =====================
+    else {
+
+        const savedPassword = localStorage.getItem(username);
+
+        if (!savedPassword) {
+            alert("帳號不存在");
+            return;
+        }
+     
+        if (savedPassword !== password) {
+            alert("密碼錯誤");
+            return;
+        }
+        
+        localStorage.setItem("currentUser", username);
+        updateUserUI();
+
+        alert("登入成功！");
+    }
+
+    closeModal();
+}
+
+// 關閉
+function closeModal() {
+
+    document.getElementById("login-modal").classList.remove("show");
+
+    document.getElementById("username").value = "";
+
+    document.getElementById("password").value = "";
+}
+
 // ===== 登出 =====
 function handleLogout() {
+
     const confirmLogout = confirm("確定要登出嗎？");
-    if (confirmLogout) {
-        alert("已成功登出！");
-    }
+
+    if (!confirmLogout) return;
+
+    localStorage.removeItem("currentUser");
+
+    updateUserUI();
+
     document.getElementById("account-menu").classList.remove("show");
+
+    alert("已成功登出！");
 }
 
 // ===== 點外面關帳號選單 =====
@@ -127,3 +206,34 @@ document.addEventListener("click", function(e) {
         accountMenu.classList.remove("show");
     }
 });
+
+function updateUserUI() {
+
+    const user = localStorage.getItem("currentUser");
+
+    const userArea = document.getElementById("user-area");
+
+    if (!userArea) return;
+
+    if (user) {
+
+        userArea.innerHTML = `
+            <span style="color:white; margin-right:10px;">
+                 ${user}
+            </span>
+
+            <button onclick="handleLogout()" style="padding:5px 10px;">
+                登出
+            </button>
+        `;
+    }
+
+    else {
+        userArea.innerHTML = "";
+    }
+}
+
+
+window.onload = function () {
+    updateUserUI();
+};
