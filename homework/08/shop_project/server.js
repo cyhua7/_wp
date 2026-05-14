@@ -6,28 +6,28 @@ const products = [
     {
         id: 1,
         name: "白色 T-shirt",
-        price: 300,
+        price: 500,
         category: "上半身",
         img: "/images/T-shirt.jpg"
     },
     {
         id: 2,
         name: "黑色 T-shirt",
-        price: 300,
+        price: 500,
         category: "上半身",
         img: "/images/T-shirt2.jpg"
     },
     {
         id: 3,
         name: "帽子",
-        price: 500,
+        price: 699,
         category: "配飾",
         img: "/images/cap.jpg"
     },
     {
         id: 4,
         name: "帽子",
-        price: 500,
+        price: 699,
         category: "配飾",
         img: "/images/cap2.jpg"
     },
@@ -41,9 +41,16 @@ const products = [
     {
         id: 6,
         name: "運動鞋",
-        price: 2000,
+        price: 2980,
         category: "鞋子",
         img: "/images/shoe.jpg"
+    },
+    {
+        id: 7,
+        name: "收納包",
+        price: 599,
+        category: "鞋子",
+        img: "/images/bag.jpg"
     }
 ];
 
