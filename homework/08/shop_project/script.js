@@ -39,7 +39,11 @@ function renderProducts(listData) {
 
         div.innerHTML = `
             <div style="height:200px; overflow:hidden; border-radius:10px; margin-bottom:15px;">
-                <img src="${product.img}" style="width:100%; height:100%; object-fit:cover;">
+                <img 
+                    src="${product.img}" 
+                    style="width:100%; height:100%; object-fit:cover; cursor:pointer;"
+                    onclick="openImage(this.src)"
+>
             </div>
             <h3>${product.name}</h3>
             <p>NT$ ${product.price}</p>
@@ -237,3 +241,15 @@ function updateUserUI() {
 window.onload = function () {
     updateUserUI();
 };
+
+function openImage(src) {
+    const modal = document.getElementById("img-modal");
+    const img = document.getElementById("img-modal-content");
+
+    img.src = src;
+    modal.classList.add("show");
+}
+
+function closeImage() {
+    document.getElementById("img-modal").classList.remove("show");
+}

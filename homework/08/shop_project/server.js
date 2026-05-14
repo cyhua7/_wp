@@ -49,7 +49,7 @@ const products = [
         id: 7,
         name: "收納包",
         price: 599,
-        category: "鞋子",
+        category: "其它",
         img: "/images/bag.jpg"
     }
 ];

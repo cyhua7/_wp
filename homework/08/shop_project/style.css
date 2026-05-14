@@ -288,3 +288,30 @@ button:hover {
     padding: 10px;
     cursor: pointer;
 }
+
+/* 圖片放大背景 */
+.img-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    justify-content: center;
+    align-items: center;
+}
+
+/* 放大圖片 */
+.img-modal img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* 開啟狀態 */
+.img-modal.show {
+    display: flex;
+}
