@@ -1,5 +1,9 @@
-# Project Report Content in Markdown
-content = """# 專案報告
+# 期中作業說明
+有使用chatgpt、Gemini協助製作:
+1.https://chatgpt.com/share/6a0fb1cb-5b40-8324-89f9-d4117f4fe59e
+2.https://chatgpt.com/share/69fda55b-40fc-8320-81bf-9b3b7c254a38
+3.https://chatgpt.com/share/69fda569-b920-8324-9073-0fa6eb7f54cc
+4.https://gemini.google.com/share/b9cb1673be28
 
 ## 專案名稱
 Node.js 基礎購物車網站與靜態伺服器實作
