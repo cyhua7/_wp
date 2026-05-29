@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>陳宥驊 — 網頁設計作業總覽</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', 'Microsoft JhengHei', sans-serif;
+      background: #f5f7fa;
+      color: #333;
+      line-height: 1.6;
+      padding: 40px 20px;
+    }
+    .container { max-width: 1100px; margin: 0 auto; }
+    header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    header h1 {
+      font-size: 2.2rem;
+      color: #1a1a2e;
+      margin-bottom: 8px;
+    }
+    header p {
+      color: #666;
+      font-size: 1.05rem;
+    }
+    header .badge {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 6px 18px;
+      background: #1a1a2e;
+      color: #fff;
+      border-radius: 20px;
+      font-size: 0.85rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+    }
+    .card .hw-num {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+    .card h2 {
+      font-size: 1.3rem;
+      color: #1a1a2e;
+      margin-bottom: 8px;
+    }
+    .card .desc {
+      color: #555;
+      font-size: 0.95rem;
+      margin-bottom: 14px;
+      flex: 1;
+    }
+    .card .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .card .links a {
+      display: inline-block;
+      padding: 6px 14px;
+      background: #f0f2f5;
+      color: #333;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      transition: background 0.2s;
+    }
+    .card .links a:hover { background: #e0e3e8; }
+    .card .run-info {
+      margin-top: 12px;
+      padding: 10px 14px;
+      background: #f8f9fc;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      color: #666;
+      font-family: 'Cascadia Code', 'Consolas', monospace;
+    }
+    footer {
+      text-align: center;
+      margin-top: 60px;
+      padding-top: 30px;
+      border-top: 1px solid #e0e0e0;
+      color: #999;
+      font-size: 0.85rem;
+    }
+    footer a { color: #666; text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    @media (max-width: 600px) {
+      body { padding: 20px 12px; }
+      header h1 { font-size: 1.6rem; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>📘 網頁設計作業總覽</h1>
+      <p>陳宥驊 · 111410522 · 國立金門大學資訊工程系</p>
+      <span class="badge">114 學年下學期</span>
+    </header>
+
+    <div class="grid">
+
+      <!-- 01 -->
+      <div class="card">
+        <div class="hw-num">Homework 01</div>
+        <h2>個人網站 HTML</h2>
+        <div class="desc">使用 HTML5 語意化標籤建立的個人介紹頁面，包含基本資料、技能與興趣區塊。</div>
+        <div class="links">
+          <a href="homework/01/aboutme.html">aboutme.html</a>
+        </div>
+        <div class="run-info">直接開啟 aboutme.html</div>
+      </div>
+
+      <!-- 02 -->
+      <div class="card">
+        <div class="hw-num">Homework 02</div>
+        <h2>表單問卷 HTML</h2>
+        <div class="desc">綜合性用戶資訊調查表單，包含文字、email、電話、日期、顏色、選單、單選等多種輸入類型。</div>
+        <div class="links">
+          <a href="homework/02/020.html">020.html</a>
+        </div>
+        <div class="run-info">直接開啟 020.html</div>
+      </div>
+
+      <!-- 03 -->
+      <div class="card">
+        <div class="hw-num">Homework 03</div>
+        <h2>Node.js 初探</h2>
+        <div class="desc">第一個 Node.js 程式，在終端機輸出 "hello 你好"。</div>
+        <div class="links">
+          <a href="homework/03/hello.js">hello.js</a>
+        </div>
+        <div class="run-info">node homework/03/hello.js</div>
+      </div>
+
+      <!-- 04 -->
+      <div class="card">
+        <div class="hw-num">Homework 04</div>
+        <h2>JavaScript 基礎語法</h2>
+        <div class="desc">10 題 JS 基礎練習：if 判斷、for/while 迴圈、function、陣列、物件、JSON 解析、巢狀結構處理。</div>
+        <div class="links">
+          <a href="homework/04/01_if_function.js">if/function</a>
+          <a href="homework/04/02_for_function.js">for/function</a>
+          <a href="homework/04/03_while_array.js">while/array</a>
+          <a href="homework/04/04_object.js">object</a>
+          <a href="homework/04/05_json_object.js">JSON</a>
+          <a href="homework/04/06_array_for_if.js">array/for/if</a>
+          <a href="homework/04/07_function.js">function</a>
+          <a href="homework/04/08_json.js">JSON/for</a>
+          <a href="homework/04/09_array_for.js">nested loop</a>
+          <a href="homework/04/10_object.js">object method</a>
+        </div>
+        <div class="run-info">node homework/04/01_if_function.js（依此類推）</div>
+      </div>
+
+      <!-- 05 -->
+      <div class="card">
+        <div class="hw-num">Homework 05</div>
+        <h2>Threads 社群平台</h2>
+        <div class="desc">Express + EJS + SQLite 打造的 Threads 風格社群平台，含註冊登入、發文刪文、個人頁面。共 4 個迭代版本。</div>
+        <div class="links">
+          <a href="homework/05/blog/">blog（基礎版）</a>
+          <a href="homework/05/blog_login版/">blog（登入版）</a>
+          <a href="homework/05/blog_個人、公共版/">blog（個人/公共版）</a>
+          <a href="homework/05/blog - 可點入發文者版面版/">blog（發文者頁面版）</a>
+        </div>
+        <div class="run-info">cd homework/05/blog &amp;&amp; npm install &amp;&amp; npm start → http://localhost:3000</div>
+      </div>
+
+      <!-- 06_new -->
+      <div class="card">
+        <div class="hw-num">Homework 06</div>
+        <h2>JavaScript 進階概念</h2>
+        <div class="desc">10 題進階練習：Callback、IIFE、map、pop/unshift、高階函式、自訂 filter、filter 物件、傳值傳參考、setTimeout、reduce。</div>
+        <div class="links">
+          <a href="homework/06_new/01.js">callback</a>
+          <a href="homework/06_new/02.js">IIFE</a>
+          <a href="homework/06_new/03.js">map</a>
+          <a href="homework/06_new/04.js">pop/unshift</a>
+          <a href="homework/06_new/05.js">高階函式</a>
+          <a href="homework/06_new/06.js">自訂 filter</a>
+          <a href="homework/06_new/07.js">filter 物件</a>
+          <a href="homework/06_new/08.js">傳值傳參考</a>
+          <a href="homework/06_new/09.js">setTimeout</a>
+          <a href="homework/06_new/10.js">reduce</a>
+        </div>
+        <div class="run-info">node homework/06_new/01.js（依此類推）</div>
+      </div>
+
+      <!-- 07 -->
+      <div class="card">
+        <div class="hw-num">Homework 07</div>
+        <h2>JavaScript 實戰練習</h2>
+        <div class="desc">10 題實戰練習：物件屬性、解構賦值、forEach 渲染 HTML、動態鍵值、Callback 模擬資料庫、JSON 解析、模板字串、map 處理、權限控制。</div>
+        <div class="links">
+          <a href="homework/07/01.js">物件屬性</a>
+          <a href="homework/07/02.js">解構賦值</a>
+          <a href="homework/07/03.js">forEach</a>
+          <a href="homework/07/04.js">動態鍵值</a>
+          <a href="homework/07/05.js">callback DB</a>
+          <a href="homework/07/06.js">JSON 解析</a>
+          <a href="homework/07/07.js">模擬 SQL</a>
+          <a href="homework/07/08.js">模板字串</a>
+          <a href="homework/07/09.js">map 處理</a>
+          <a href="homework/07/10.js">權限控制</a>
+        </div>
+        <div class="run-info">node homework/07/01.js（依此類推）</div>
+      </div>
+
+      <!-- 08 -->
+      <div class="card">
+        <div class="hw-num">Homework 08</div>
+        <h2>購物車網站</h2>
+        <div class="desc">原生 Node.js http 模組建立的購物網站，含商品列表、分類篩選、購物車、註冊登入（LocalStorage）、圖片放大 Modal。</div>
+        <div class="links">
+          <a href="homework/08/shop_project/index.html">index.html</a>
+          <a href="homework/08/shop_project/cart.html">cart.html</a>
+          <a href="homework/08/shop_project/server.js">server.js</a>
+          <a href="homework/08/shop_project/style.css">style.css</a>
+          <a href="homework/08/shop_project/script.js">script.js</a>
+        </div>
+        <div class="run-info">node homework/08/shop_project/server.js → http://localhost:3000</div>
+      </div>
+
+      <!-- 09 -->
+      <div class="card">
+        <div class="hw-num">Homework 09</div>
+        <h2>作業九</h2>
+        <div class="desc">（README 說明文件）</div>
+        <div class="links">
+          <a href="homework/09/README.md">README.md</a>
+        </div>
+        <div class="run-info">直接開啟 README.md</div>
+      </div>
+
+    </div>
+
+    <footer>
+      <p>&copy; 2026 陳宥驊 · <a href="https://github.com/cyhua7/_wp">GitHub</a> · <a href="homework/作業統整.md">作業統整</a></p>
+    </footer>
+  </div>
+</body>
+</html>
