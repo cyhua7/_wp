@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>網頁設計課程 - 成果作業彙整平台</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
+            --accent-hover: #7dd3fc;
+            --success: #34d399;
+            --warning: #fbbf24;
+            --danger: #f87171;
+            --border: #334155;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Noto Sans TC', sans-serif;
+            line-height: 1.6;
+            padding-bottom: 60px;
+        }
+
+        code, pre {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* 頂部導覽列 */
+        header {
+            background-color: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        header h1 span {
+            color: var(--accent);
+        }
+
+        .student-info {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-align: right;
+        }
+
+        /* 主視覺區 */
+        .hero {
+            max-width: 1200px;
+            margin: 40px auto 20px;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        /* 統計資訊欄 */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto 40px;
+            padding: 0 20px;
+        }
+
+        .stat-box {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-3px);
+        }
+
+        .stat-box i {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .stat-box .num {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .stat-box .label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* 主要內容佈局 */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 30px;
+            padding: 0 20px;
+        }
+
+        /* 左側作業導覽選單 */
+        .sidebar {
+            position: sticky;
+            top: 100px;
+            height: calc(100vh - 140px);
+            overflow-y: auto;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .sidebar h3 {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-list {
+            list-style: none;
+        }
+
+        .nav-item {
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            transition: all 0.2s;
+        }
+
+        .nav-item:hover {
+            background-color: rgba(56, 189, 248, 0.1);
+            color: var(--text-main);
+        }
+
+        .nav-item.active {
+            background-color: var(--accent);
+            color: #000;
+            font-weight: bold;
+        }
+
+        .nav-item .badge {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+        }
+
+        /* 右側作業詳情展示面板 */
+        .content-panel {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 40px;
+            min-height: 500px;
+        }
+
+        .assignment-view {
+            display: none;
+        }
+
+        .assignment-view.active {
+            display: block;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 作業內容元件樣式 */
+        .view-header {
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+        }
+
+        .tag {
+            display: inline-block;
+            background-color: rgba(56, 189, 248, 0.1);
+            color: var(--accent);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .tag.project-tag {
+            background-color: rgba(251, 191, 36, 0.1);
+            color: var(--warning);
+        }
+
+        .view-header h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .desc-box {
+            background-color: rgba(15, 23, 42, 0.4);
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            margin: 25px 0 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--accent-hover);
+        }
+
+        .tech-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .tech-item {
+            background-color: #0f172a;
+            border: 1px solid var(--border);
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+
+        .tech-item strong {
+            color: var(--accent);
+        }
+
+        /* 題目列表樣式 */
+        .sub-quiz-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .quiz-card {
+            background-color: #0f172a;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .quiz-card h4 {
+            color: var(--accent-hover);
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .quiz-card p {
+            color: var(--text-main);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .quiz-card .note {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-style: italic;
+            margin-bottom: 8px;
+        }
+
+        .quiz-card pre {
+            background-color: #1e293b;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            overflow-x: auto;
+            border: 1px solid rgba(255,255,255,0.05);
+            color: #e2e8f0;
+        }
+
+        /* Debug 日誌專用樣式 */
+        .debug-log {
+            border-left: 4px solid var(--danger);
+            background-color: rgba(248, 113, 113, 0.05);
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 15px;
+        }
+
+        /* RWD 響應式調整 */
+        @media (max-width: 900px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                position: static;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1><i class="fa-solid fa-code-branches"></i> <span>WebDev</span> Portfolio</h1>
+        <div class="student-info">
+            <strong>國立金門大學 資工系</strong><br>
+            <span>成果作業彙整平台</span>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h2>網頁設計課程 全網頁成果展</h2>
+        <p>點選左側目錄，即可無縫切換檢視作業一到作業八的完整大綱、程式碼解析與技術點統整。</p>
+    </section>
+
+    <section class="stats-bar">
+        <div class="stat-box">
+            <i class="fa-solid fa-layer-group"></i>
+            <span class="num">8 份</span>
+            <span class="label">歷程作業總數</span>
+        </div>
+        <div class="stat-box">
+            <i class="fa-brands fa-js"></i>
+            <span class="num">20 題</span>
+            <span class="label">JS 進階思維核心題解</span>
+        </div>
+        <div class="stat-box">
+            <i class="fa-solid fa-server"></i>
+            <span class="num">1 個</span>
+            <span class="label">不依賴框架原生後端伺服器</span>
+        </div>
+    </section>
+
+    <main class="main-container">
+        
+        <aside class="sidebar">
+            <h3>作業目錄索引</h3>
+            <ul class="nav-list" id="navList">
+                <li class="nav-item active" data-target="hw1"><span class="badge">01</span> 前端網頁骨架</li>
+                <li class="nav-item" data-target="hw2"><span class="badge">02</span> 互動問卷樣式</li>
+                <li class="nav-item" data-target="hw3"><span class="badge">03</span> JavaScript初探</li>
+                <li class="nav-item" data-target="hw4"><span class="badge">04</span> 十全大補語法</li>
+                <li class="nav-item" data-target="hw5"><span class="badge">05</span> 專案版本控制</li>
+                <li class="nav-item" data-target="hw6"><span class="badge">06</span> 高階函數與指標</li>
+                <li class="nav-item" data-target="hw7"><span class="badge">07</span> 異步錯誤優先回呼</li>
+                <li class="nav-item" data-target="hw8"><span class="badge">08</span> 期中電商大專案</li>
+            </ul>
+        </aside>
+
+        <section class="content-panel" id="contentPanel">
+            
+            <div class="assignment-view active" id="hw1">
+                <div class="view-header">
+                    <span class="tag">前端網頁基礎</span>
+                    <h2>作業一：前端基礎網頁骨架</h2>
+                </div>
+                <div class="desc-box">
+                    <strong>專案目標：</strong>掌握 HTML5 語義化標籤（Semantic HTML）的運用，建立結構嚴謹的個人履歷網站骨架。
+                </div>
+                <h3 class="section-title"><i class="fa-solid fa-gears"></i> 核心技術點</h3>
+                <ul class="tech-list">
+                    <li class="tech-item"><strong>Semantic HTML5 標籤：</strong>使用 <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;footer&gt;</code> 替代無意義的 div。</li>
+                    <li class="tech-item"><strong>網頁結構錨點：</strong>利用超連結（Anchor Tags）進行網頁內跳轉。</li>
+                    <li class="tech-item"><strong>多頁面配置：</strong>切分建構「首頁」、「關於我」、「作品集」三大核心區塊。</li>
+                </ul>
+            </div>
+
+            <div class="assignment-view" id="hw2">
+                <div class="view-header">
+                    <span class="tag">網頁互動表單</span>
+                    <h2>作業二：互動問卷表單與樣式</h2>
+                </div>
+                <div class="desc-box">
+                    <strong>專案目標：</strong>設計多樣化輸入元件的互動問卷，熟悉 HTML 表單屬性與基礎 CSS 外框樣式。
+                </div>
+                <h3 class="section-title"><i class="fa-solid fa-gears"></i> 核心技術點</h3>
+                <ul class="tech-list">
+                    <li class="tech-item"><strong>表單元件整合：</strong>熟練運用 <code>text</code>, <code>radio</code>, <code>checkbox</code>, <code>select</code> 與 <code>textarea</code>。</li>
+                    <li class="tech-item"><strong>CSS 基礎佈局：</strong>利用 Padding, Margin, Border 調校欄位對齊，優化使用者填寫體驗。</li>
+                </ul>
+            </div>
+
+            <div class="assignment-view" id="hw3">
+                <div class="view-header">
+                    <span class="tag">後端語法初探</span>
+                    <h2>作業三：JavaScript 環境初探與 hello.js</h2>
+                </div>
+                <div class="desc-box">
+                    <strong>作業題目：</strong>寫一個 JavaScript 程式 hello.js 交上來。
+                </div>
+                <h3 class="section-title"><i class="fa-solid fa-gears"></i> 核心技術點</h3>
+                <ul class="tech-list">
+                    <li class="tech-item"><strong>本地執行環境：</strong>脫離瀏覽器限制，在電腦設定 Node.js 執行環境。</li>
+                    <li class="tech-item"><strong>終端機操作：</strong>掌握命令列（CLI），透過 <code>node hello.js</code> 執行並編譯指令碼。</li>
+                    <li class="tech-item"><strong>控制台輸出：</strong>掌握最基本的標準輸出 <code>console.log()</code>。</li>
+                </ul>
+            </div>
+
+            <div class="assignment-view" id="hw4">
+                <div class="view-header">
+                    <span class="tag">程式邏輯控制</span>
+                    <h2>作業四：JavaScript 十全大補基礎語法練習</h2>
+                </div>
+                <div class="desc-box">
+                    <strong>作業題目：</strong>請寫 10 個 javascript 程式練習，要包含 if, for, while, function, json, array, object。題目與答案自己用 AI 創寫，要求每個程式都要測過看懂，最後寫一個 Markdown 格式的 README.md。
+                </div>
+                <h3 class="section-title"><i class="fa-solid fa-gears"></i> 核心精要技術</h3>
+                <ul class="tech-list">
+                    <li class="tech-item"><strong>三大流程控制：</strong>熟練掌握 <code>if-else</code> 條件分支、<code>for</code> 邏輯迴圈、與 <code>while</code> 中斷判斷。</li>
+                    <li class="tech-item"><strong>資料容器封裝：</strong>處理 <code>Array</code> 陣列操作與 <code>Object</code> 物件屬性字典。</li>
+                    <li class="tech-item"><strong>JSON 格式交換：</strong>理解結構化資料 JSON 與 JavaScript 物件之間的關聯。</li>
+                    <li class="tech-item"><strong>文件工程修煉：</strong>學會用標準 Markdown 語法撰寫軟體說明文件。</li>
+                </ul>
+            </div>
+
+            <div class="assignment-view" id="hw5">
+                <div class="view-header">
+                    <span class="tag">專案版本控制</span>
+                    <h2>作業五：opencode 多版本網站專案管理</h2>
+                </div>
+                <div class="desc-box">
+                    <strong>作業題目：</strong>請用 opencode 做一個網站專案，分版本，全部交上來。
+                </div>
+                <h3 class="section-title"><i class="fa-solid fa-gears"></i> 核心技術點</h3>
+                <ul class="tech-list">
+                    <li class="tech-item"><strong>版本管理觀念：</strong>理解軟體工程生命週期，記錄每次功能的迭代與代碼優化。</li>
+                    <li class="tech-item"><strong>opencode 實作：</strong>在雲端平台上建置多版本的網站專案並進行多歷史節點的完整提交。</li>
+                </ul>
+            </div>
+
+            <div class="assignment-view" id="hw6">
+                <div class="view-header">
+                    <span class="tag">JS 進階核心邏輯</span>
+                    <h2>作業六：JS 進階邏輯與高階函數修煉 (10題解全收錄)</h2>
+                </div>
+                <div class="desc-box">
+                    <strong>作業題目：</strong>寫出 10 題有關 JavaScript 函數與參數的練習解答。深入函數式程式設計（Functional Programming）與記憶體配置核心觀念。
+                </div>
+
+                <h3 class="section-title"><i class="fa-solid fa-list-check"></i> 完整 10 題解原始碼展示</h3>
+                <div class="sub-quiz-list">
+                    <div class="quiz-card">
+                        <h4>第 1 題：Callback 基礎解耦應用 (mathTool)</h4>
+                        <p>將計算邏輯（相加、相減）抽離成匿名函數傳入，實作邏輯分離。</p>
+                        <pre>function mathTool(num1, num2, action) {
+    return action(num1, num2);
+}
+console.log(mathTool(10, 5, (a, b) =&gt; a + b)); // 輸出 15
+console.log(mathTool(10, 5, (a, b) =&gt; a - b)); // 輸出 5</pre>
+                    </div>
+
+                    <div class="quiz-card">
+                        <h4>第 2 題：立即執行函數 (IIFE) 與範疇鎖定</h4>
+                        <p>建立獨立的私有範疇，鎖定內部關鍵變數防全域污染。</p>
+                        <pre>(function() {
+    let localVar = "私有變數";
+    console.log("IIFE 自動執行，內部變數：" + localVar);
+})();</pre>
+                    </div>
+
+                    <div class="quiz-card">
+                        <h4>第 3 題：箭頭函數與陣列批量轉換 (map)</h4>
+                        <p>不污染或破壞原始陣列，批量映射回傳全新陣列（打 8 折）。</p>
+                        <pre>const prices = [100, 200, 300];
+const discounted = prices.map(p =&gt; p * 0.8);
+console.log(discounted); // [80, 160, 240]</pre>
+                    </div>
+
+                    <div class="quiz-card">
+                        <h4>第 4 題：陣列與物件引數的「破壞性修改」特性</h4>
+                        <p>探討傳址（Pass by Reference）特性。在函數內操作 <code>arr.pop()</code> 會直接改動到外層陣列的記憶體實體。</p>
+                        <pre>function modifyArr(arr) {
+    arr.pop();
+}
+let myArr = [1, 2, 3];
+modifyArr(myArr);
+console.log(myArr); // [1, 2] （外層被破壞了）</pre>
+                    </div>
+
+                    <div class="quiz-card">
+                        <h4>第 5 題：函數回傳函數 (Higher-Order Function) 高階閉包</h4>
+                        <p>運用閉包鎖定外層引數倍率，動態生成客製化乘法器。</p>
+                        <pre>const multiplier = (factor) =&gt; (n) =&gt; n * factor;
+const double = multiplier(2);
+console.log(double(10)); // 20
+const triple = multiplier(3);
+console.log(triple(10)); // 30</pre>
+                    </div>
+
+                    <div class="quiz-card">
+                        <h4>第 6 題：手寫 Callback 條件篩選器 (myFilter)</h4>
+                        <p>手動實作 filter 核心邏輯，依據 <code>callback(item)</code> 的布林值結果決定留存。</p>
+                        <pre>function myFilter(array, callback) {
+    let result = [];
+    for(let item of array) {
+        if(callback(item)) result.push(item);
+    }
+    return result;
+}
+console.log(myFilter([1,2,3,4], n =&gt; n % 2 === 0)); // [2, 4]</pre>
+                    </div>
+
+                    <div class="quiz-card">
+                        <h4>第 7 題：利用高階箭頭函數處理多層物件陣列</h4>
+                        <p>過濾出陣列物件中符合條件的特定資料群（如年齡大於等於 18 歲）。</p>
+                        <pre>const users = [{name:"A", age:15}, {name:"B", age:20}];
+const adults = users.filter(user =&gt; user.age &gt;= 18);
+console.log(adults); // [{name:"B", age:20}]</pre>
+                    </div>
+
+                    <div class="quiz-card">
+                        <h4>第 8 題：記憶體指標傳參陷阱：重新賦值 vs 原位修改</h4>
+                        <p>深入探討：<code>obj.score</code> 是改動原指標記憶體（外層變更）；而重新賦值是將內部參考導向新位址（外層不變）。</p>
+                        <pre>function test(obj) {
+    obj.score = 90;   // 修改屬性 (外層會變)
+    obj = { score: 100 }; // 重新賦值 (外層不變)
+}</pre>
+                    </div>
+
+                    <div class="quiz-card">
+                        <h4>第 9 題：非同步延遲執行的 Callback 控制</h4>
+                        <p>使用 <code>setTimeout</code> 來達成非同步時間差調用，結合陣列方法串接字串。</p>
+                        <pre>setTimeout(() =&gt; {
+    console.log(["Task", "Completed"].join(" "));
+}, 2000);</pre>
+                    </div>
+
+                    <div class="quiz-card">
+                        <h4>第 10 題：綜合實戰應用：購物車總價與折扣回呼</h4>
+                        <p>將購物車陣列數字進行加總累計後，動態傳入指定的折扣回呼函數中算出最終價。</p>
+                        <pre>function calculateTotal(cart, discountFunc) {
+    let total = cart.reduce((sum, price) =&gt; sum + price, 0);
+    return discountFunc(total);
+}
+console.log(calculateTotal([100, 200], total =&gt; total - 50)); // 250</pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="assignment-view" id="hw7">
+                <div class="view-header">
+                    <span class="tag">後端模擬與異步規範</span>
+                    <h2>作業七：後端資料庫對接與異步錯誤優先回呼 (10題解全收錄)</h2>
+                </div>
+                <div class="desc-box">
+                    <strong>作業題目：</strong>寫出 10 題專為 Express 部落格範例程式設計的挑戰題解。打通「資料如何從資料庫流向網頁」與「非同步錯誤優先回呼」的脈絡。
+                </div>
+
+                <h3 class="section-title"><i class="fa-solid fa-list-check"></i> 完整 10 題解原始碼展示</h3>
+                <div class="sub-quiz-list">
+                    <div class="quiz-card">
+                        <h4>第 1 題：後端物件屬性動態存取</h4>
+                        <p>掌握點符號 <code>post.title</code> 與中括號動態 <code>post["title"]</code> 在取值時的差異。</p>
+                        <pre>const post = { title: "JS教學", views: 50 };
+console.log(post.title);
+console.log(post["views"]);</pre>
+                    </div>
+
+                    <div class="quiz-card">
+                        <h4>第 2 題：後端路由請求體物件解構賦值 (Destructuring)</h4>
+                        <p>模擬 Express 接收到前端 POST 請求時，秒速抽取特定的資料欄位：</p>
+                        <pre>const req = { body: { title: "新文章", content: "內容描述..." } };
+const { title, content } = req.body;
+console.log(title, content);</pre>
+                    </div>
+
+                    <div class="quiz-card">
+                        <h4>第 3 題：文章陣列遍歷與網頁 HTML 字串拼接</h4>
+                        <p>首頁生成文章列表的核心：使用 <code>posts.forEach</code> 遍歷並用樣板字串組裝 HTML 段落。</p>
+                        <pre>let html = "";
+posts.forEach(p =&gt; {
+    html += `&lt;div class="post"&gt;${p.title}&lt;/div&gt;`;
+});</pre>
+                    </div>
+
+                    <div class="quiz-card">
+                        <h4>第 4 題：字典鍵值對與動態路由參數 (URL Params) 模擬</h4>
+                        <p>理解 Express 的 <code>req.params.id</code> 對照模型，將 ID 映射到對應的文章物件中。</p>
+                        <pre>const params = { id: "5" };
+console.log("正在查詢 ID 為 " + params.id + " 的文章");</pre>
+                    </div>
+
+                    <div class="quiz-card">
+                        <h4>第 5 題：實作非同步「錯誤優先」回呼函數 (Error-First Callback)</h4>
+                        <p class="note">Node.js 核心工業標準慣例，第一個參數放 err，第二個參數才安全丟回資料。</p>
+                        <pre>function fetchData(id, callback) {
+    if (id &lt; 0) {
+        return callback(new Error("ID不合法"), null);
+    }
+    const fakeData = { id: id, status: "success" };
+    callback(null, fakeData);
+}</pre>
+                    </div>
+
+                    <div class="quiz-card">
+                        <h4>第 6 題：JSON 字串反序列化解析與防錯</h4>
+                        <p>使用 <code>JSON.parse(jsonStr)</code> 將資料庫或 API 抓回的純文字轉回可操作的 JS 物件。</p>
+                        <pre>const jsonStr = '{"title": "Nodejs", "id": 1}';
+const obj = JSON.parse(jsonStr);
+console.log(obj.title); // Nodejs</pre>
+                    </div>
+
+                    <div class="quiz-card">
+                        <h4>第 7 題：模擬 SQL 資料庫查詢行為 (Simulating Database Query)</h4>
+                        <p class="note">模仿 sqlite3 套件的 <code>db.get(sql, params, callback)</code> API，讓學生明白非同步完成後回呼函數如何承接內部查到的 row 資料。</p>
+                        <pre>function fakeGet(sql, params, callback) {
+    setTimeout(() => {
+        const fakeRow = { id: params[0], title: "資料庫回傳的文章" };
+        callback(null, fakeRow);
+    }, 500);
+}</pre>
+                    </div>
+
+                    <div class="quiz-card">
+                        <h4>第 8 題：樣板字串與三元運算子的條件式渲染</h4>
+                        <p>在 HTML 範本中利用短路或三元運算子，動態渲染使用者登入狀態。</p>
+                        <pre>const renderHeader = (user) =&gt; {
+    return `&lt;h1&gt;歡迎, ${user ? user.name : "訪客"}&lt;/h1&gt;`;
+};</pre>
+                    </div>
+
+                    <div class="quiz-card">
+                        <h4>第 9 題：文章字串切片與前台長度預覽 (slice)</h4>
+                        <p>利用 <code>str.slice(0, 10) + "..."</code> 限制字數，實作部落格首頁的文章大綱摘要。</p>
+                        <pre>const content = "這是一篇非常長長長的文章內容描述...";
+const summary = content.length &gt; 10 ? content.slice(0, 10) + "..." : content;
+console.log(summary);</pre>
+                    </div>
+
+                    <div class="quiz-card">
+                        <h4>第 10 題：後端路由的錯誤優先攔截與提前回傳中斷</h4>
+                        <p>理解後端代碼中隨處可見的 <code>if (err) return callback(err);</code> 機制，防系統因後續讀取 undefined 而崩潰。</p>
+                        <pre>function checkAdmin(user, callback) {
+    if (!user || user.role !== "admin") {
+        return callback("權限不足，拒絕訪問"); // 提前 return 中斷
+    }
+    callback(null, "驗證通過");
+}</pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="assignment-view" id="hw8">
+                <div class="view-header">
+                    <span class="tag project-tag">核心期中大專案</span>
+                    <h2>作業八：【期中大專案】原生 Node.js 電商購物車網站</h2>
+                </div>
+                <div class="desc-box">
+                    <strong>專案核心：</strong>捨棄 Express 框架，純手寫 Node.js 原生伺服器。底層實現靜態資源分流、MIME 類型動態辨識與 LocalStorage 前端購物車持久化。
+                </div>
+
+                <h3 class="section-title"><i class="fa-solid fa-server"></i> 後端與前端架構實戰</h3>
+                <ul class="tech-list">
+                    <li class="tech-item"><strong>原生 server.js 判斷鏈：</strong>精確攔截路徑，利用 <code>path.extname()</code> 辨識 <code>.css</code> 與 <code>.js</code>，開闢 <code>/products</code> API 並解鎖跨域 CORS 響應頭。</li>
+                    <li class="tech-item"><strong>LocalStorage 購物車持久化：</strong>利用序列化快取商務資料，實作流暢的商品精確刪除與動態總計。</li>
+                </ul>
+
+                <h3 class="section-title"><i class="fa-solid fa-bug"></i> 實戰開發除錯紀錄 (Debug Log)</h3>
+                <div class="debug-log">
+                    <h4>⚠️ 痛點一：頁面渲染異常（畫面黑屏空白）</h4>
+                    <p><strong>原因：</strong> 編輯整合原始碼時，不小心將 <code>index.html</code> 骨架重複嵌套進 <code>cart.html</code> 內部（html 內包含 html），使瀏覽器 DOM 樹解析崩潰。</p>
+                    <p style="margin-top: 5px; color: var(--accent);"><strong>解法：</strong> 全面重構剔除冗餘標籤，回復單一乾淨標準 HTML5 結構。</p>
+                </div>
+                <div class="debug-log" style="border-left-color: var(--warning); background-color: rgba(251, 191, 36, 0.05);">
+                    <h4>⚠️ 痛點二：靜態資源路由權限過寬攔截錯誤</h4>
+                    <p><strong>原因：</strong> <code>server.js</code> 將寬鬆條件判斷寫在頂層，攔截了所有精確請求，使資源檔被誤賦予成圖片 MIME 類型（image/jpeg）遭瀏覽器拒絕解析。</p>
+                    <p style="margin-top: 5px; color: var(--warning); "><strong>解法：</strong> 調整判斷鏈順序：「精確網頁路徑」置頂，其次為「特定資源目錄」，通用規則與 404 放最
