@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>網頁程式設計作業統整 — 陳宥驊</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', 'Microsoft JhengHei', sans-serif;
+      background: #f5f7fa;
+      color: #333;
+      line-height: 1.7;
+    }
+    .container { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+
+    /* header */
+    header {
+      text-align: center;
+      margin-bottom: 50px;
+      padding-bottom: 30px;
+      border-bottom: 2px solid #e0e0e0;
+    }
+    header h1 { font-size: 2rem; color: #1a1a2e; }
+    header .meta { color: #666; margin-top: 8px; font-size: 1rem; }
+    header .meta a { color: #1a73e8; text-decoration: none; }
+    header .meta a:hover { text-decoration: underline; }
+    header .ai-link {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 6px 16px;
+      background: #e8f0fe;
+      color: #1a73e8;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      text-decoration: none;
+    }
+    header .ai-link:hover { background: #d2e3fc; }
+
+    /* toc */
+    .toc {
+      background: #fff;
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-bottom: 40px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+    }
+    .toc h2 { font-size: 1.1rem; color: #1a1a2e; margin-bottom: 12px; }
+    .toc ol { padding-left: 20px; columns: 2; column-gap: 32px; }
+    .toc ol li { margin-bottom: 6px; break-inside: avoid; }
+    .toc ol li a { color: #1a73e8; text-decoration: none; font-size: 0.95rem; }
+    .toc ol li a:hover { text-decoration: underline; }
+    @media (max-width: 600px) { .toc ol { columns: 1; } }
+
+    /* homework section */
+    .hw { margin-bottom: 40px; }
+    .hw-header {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px 24px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+      margin-bottom: 16px;
+    }
+    .hw-header .num {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .hw-header h2 { font-size: 1.25rem; color: #1a1a2e; margin: 4px 0 8px; }
+    .hw-header .dir {
+      display: inline-block;
+      padding: 2px 10px;
+      background: #e8f0fe;
+      color: #1a73e8;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-family: 'Consolas', monospace;
+    }
+    .hw-header p { color: #555; font-size: 0.95rem; margin-top: 8px; }
+
+    .hw-body { padding: 0 8px; }
+
+    /* module card */
+    .module-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px;
+      margin: 12px 0;
+    }
+    .module-item {
+      background: #fff;
+      border: 1px solid #eee;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 0.88rem;
+    }
+    .module-item strong { color: #1a1a2e; }
+
+    .tech-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 10px 0;
+    }
+    .tech-tag {
+      padding: 4px 12px;
+      background: #f0f2f5;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      color: #555;
+    }
+
+    /* code block */
+    .code-block {
+      background: #1e1e2e;
+      color: #cdd6f4;
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin: 12px 0;
+      overflow-x: auto;
+      font-family: 'Cascadia Code', 'Consolas', monospace;
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+    .code-block .kw { color: #cba6f7; }
+    .code-block .fn { color: #89b4fa; }
+    .code-block .str { color: #a6e3a1; }
+    .code-block .num { color: #fab387; }
+    .code-block .cm { color: #6c7086; font-style: italic; }
+    .code-block .op { color: #89dceb; }
+    .code-block .out { color: #a6adc8; }
+    .code-block .tag { color: #f38ba8; }
+
+    .output-box {
+      background: #f0f2f5;
+      border-radius: 8px;
+      padding: 10px 16px;
+      margin: 8px 0 16px;
+      font-family: 'Consolas', monospace;
+      font-size: 0.85rem;
+      color: #555;
+    }
+
+    .hw-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0;
+      font-size: 0.9rem;
+    }
+    .hw-table th, .hw-table td {
+      border: 1px solid #e0e0e0;
+      padding: 8px 12px;
+      text-align: left;
+    }
+    .hw-table th { background: #f8f9fc; color: #1a1a2e; font-weight: 600; }
+
+    .issue-list { list-style: none; padding: 0; }
+    .issue-list li {
+      background: #fff;
+      border: 1px solid #eee;
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+    }
+    .issue-list li strong { color: #d63384; }
+    .issue-list li .arrow { color: #1a73e8; }
+
+    /* bottom nav */
+    .bottom-nav {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid #e0e0e0;
+    }
+    .bottom-nav a {
+      color: #1a73e8;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .bottom-nav a:hover { text-decoration: underline; }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #999;
+      font-size: 0.85rem;
+    }
+    footer a { color: #666; text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 600px) {
+      .container { padding: 20px 12px; }
+      header h1 { font-size: 1.4rem; }
+      .hw-header { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <h1>📘 網頁程式設計作業統整</h1>
+    <div class="meta">
+      陳宥驊 · 111410522 · 國立金門大學資訊工程系<br>
+      <a href="https://github.com/cyhua7/_wp/tree/master/homework">GitHub</a>
+    </div>
+    <a class="ai-link" href="https://opncd.ai/share/iFhKMIqI">🤖 AI 對話記錄</a>
+  </header>
+
+  <!-- TOC -->
+  <nav class="toc">
+    <h2>📑 目錄</h2>
+    <ol>
+      <li><a href="#hw1">個人網站 HTML</a></li>
+      <li><a href="#hw2">表單問卷 HTML</a></li>
+      <li><a href="#hw3">Node.js 初探</a></li>
+      <li><a href="#hw4">JavaScript 基礎語法練習</a></li>
+      <li><a href="#hw5">Threads 風格社群平台</a></li>
+      <li><a href="#hw6">JavaScript 進階概念練習</a></li>
+      <li><a href="#hw7">JavaScript 實戰練習</a></li>
+      <li><a href="#hw8">Node.js 購物車網站</a></li>
+    </ol>
+  </nav>
+
+  <!-- HW1 -->
+  <section class="hw" id="hw1">
+    <div class="hw-header">
+      <div class="num">Homework 01</div>
+      <h2>個人網站 HTML</h2>
+      <span class="dir">01/aboutme.html</span>
+      <p>一個介紹自己的靜態個人網站頁面。</p>
+    </div>
+    <div class="hw-body">
+      <div class="module-grid">
+        <div class="module-item"><strong>基本資料展示區</strong> — 姓名、學號、就讀學校</div>
+        <div class="module-item"><strong>技術技能區</strong> — 呈現目前學習狀態</div>
+        <div class="module-item"><strong>研究興趣區</strong> — 標示探索中的技術領域</div>
+        <div class="module-item"><strong>頁尾版權資訊</strong></div>
+      </div>
+      <div class="tech-list">
+        <span class="tech-tag">HTML5</span>
+        <span class="tech-tag">CSS3 Flexbox</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- HW2 -->
+  <section class="hw" id="hw2">
+    <div class="hw-header">
+      <div class="num">Homework 02</div>
+      <h2>表單問卷 HTML</h2>
+      <span class="dir">02/020.html</span>
+      <p>一個綜合性的用戶資訊調查問卷表單。</p>
+    </div>
+    <div class="hw-body">
+      <div class="module-grid">
+        <div class="module-item"><strong>姓名輸入</strong> — 文字框（必填）</div>
+        <div class="module-item"><strong>電子郵件</strong> — Email 驗證（必填）</div>
+        <div class="module-item"><strong>電話</strong> — 電話號碼欄位</div>
+        <div class="module-item"><strong>性別</strong> — 單選按鈕</div>
+        <div class="module-item"><strong>職業</strong> — 下拉式選單</div>
+        <div class="module-item"><strong>日期</strong> — 日期選擇器</div>
+        <div class="module-item"><strong>興趣</strong> — 自由文字</div>
+        <div class="module-item"><strong>顏色</strong> — 選色盤</div>
+        <div class="module-item"><strong>留言</strong> — 多行文字</div>
+        <div class="module-item"><strong>提交按鈕</strong> — 表單送出</div>
+      </div>
+      <div class="tech-list">
+        <span class="tech-tag">HTML5 Form</span>
+        <span class="tech-tag">CSS3 Card</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- HW3 -->
+  <section class="hw" id="hw3">
+    <div class="hw-header">
+      <div class="num">Homework 03</div>
+      <h2>Node.js 初探</h2>
+      <span class="dir">03/</span>
+      <p>第一個 Node.js 程式，在終端機輸出 "hello 你好"。</p>
+    </div>
+    <div class="hw-body">
+      <div class="code-block">
+        <span class="cm">// hello.js</span><br>
+        <span class="fn">console.log</span>(<span class="str">'hello 你好'</span>);
+      </div>
+      <div class="output-box">
+        PS C:\_wp\homework\03&gt; node hello.js<br>
+        hello 你好
+      </div>
+    </div>
+  </section>
+
+  <!-- HW4 -->
+  <section class="hw" id="hw4">
+    <div class="hw-header">
+      <div class="num">Homework 04</div>
+      <h2>JavaScript 基礎語法練習</h2>
+      <span class="dir">04/</span>
+      <p>十題 JavaScript 基礎綜合練習，涵蓋 <code>if</code>、<code>for</code>、<code>while</code>、<code>function</code>、<code>JSON</code>、<code>array</code>、<code>object</code>。</p>
+    </div>
+    <div class="hw-body">
+
+      <div class="code-block">
+        <span class="cm">// 01 — if/function</span><br>
+        <span class="kw">function</span> <span class="fn">checkScore</span>(score) {<br>
+        &nbsp;&nbsp;<span class="kw">if</span> (score &lt; <span class="num">0</span> || score &gt; <span class="num">100</span>) <span class="kw">return</span> <span class="str">"錯誤輸入"</span>;<br>
+        &nbsp;&nbsp;<span class="kw">if</span> (score &gt;= <span class="num">90</span>) <span class="kw">return</span> <span class="str">"A"</span>;<br>
+        &nbsp;&nbsp;<span class="kw">if</span> (score &gt;= <span class="num">80</span>) <span class="kw">return</span> <span class="str">"B"</span>;<br>
+        &nbsp;&nbsp;<span class="kw">if</span> (score &gt;= <span class="num">70</span>) <span class="kw">return</span> <span class="str">"C"</span>;<br>
+        &nbsp;&nbsp;<span class="kw">return</span> <span class="str">"F"</span>;<br>
+        }<br>
+        <span class="fn">console.log</span>(<span class="fn">checkScore</span>(<span class="num">85</span>));&nbsp;&nbsp;<span class="cm">// B</span>
+      </div>
+
+      <div class="code-block">
+        <span class="cm">// 02 — for/function</span><br>
+        <span class="kw">function</span> <span class="fn">sumRange</span>(n) {<br>
+        &nbsp;&nbsp;<span class="kw">let</span> total = <span class="num">0</span>;<br>
+        &nbsp;&nbsp;<span class="kw">for</span> (<span class="kw">let</span> i = <span class="num">1</span>; i &lt;= n; i++) total += i;<br>
+        &nbsp;&nbsp;<span class="kw">return</span> total;<br>
+        }<br>
+        <span class="fn">console.log</span>(<span class="fn">sumRange</span>(<span class="num">10</span>));&nbsp;&nbsp;<span class="cm">// 55</span>
+      </div>
+
+      <div class="code-block">
+        <span class="cm">// 03 — while/array</span><br>
+        <span class="kw">const</span> nums = [<span class="num">3</span>, <span class="num">7</span>, <span class="num">2</span>, <span class="num">9</span>, <span class="num">5</span>];<br>
+        <span class="kw">let</span> index = <span class="num">0</span>;<br>
+        <span class="kw">while</span> (index &lt; nums.length) {<br>
+        &nbsp;&nbsp;<span class="kw">if</span> (nums[index] &gt; <span class="num">8</span>) {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="fn">console.log</span>(<span class="str">`找到數字 <span class="op">${</span>nums[index]<span class="op">}</span> 在索引 <span class="op">${</span>index<span class="op">}</span>`</span>);<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">break</span>;<br>
+        &nbsp;&nbsp;}<br>
+        &nbsp;&nbsp;index++;<br>
+        }
+      </div>
+
+      <div class="code-block">
+        <span class="cm">// 08 — for/object/JSON (購物車結帳)</span><br>
+        <span class="kw">const</span> jsonList = <span class="str">'[{"name": "書", "price": 200}, {"name": "筆", "price": 30}]'</span>;<br>
+        <span class="kw">const</span> items = <span class="fn">JSON.parse</span>(jsonList);<br>
+        <span class="kw">let</span> total = <span class="num">0</span>;<br>
+        <span class="kw">for</span> (<span class="kw">let</span> item <span class="kw">of</span> items) total += item.price;<br>
+        <span class="fn">console.log</span>(<span class="str">`總金額為: <span class="op">${</span>total<span class="op">}</span>`</span>);&nbsp;&nbsp;<span class="cm">// 總金額為: 230</span>
+      </div>
+
+      <div class="code-block">
+        <span class="cm">// 10 — object/function (銀行提款)</span><br>
+        <span class="kw">let</span> bankAccount = {<br>
+        &nbsp;&nbsp;balance: <span class="num">1000</span>,<br>
+        &nbsp;&nbsp;<span class="fn">withdraw</span>(amount) {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">if</span> (<span class="kw">this</span>.balance &gt;= amount) {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">this</span>.balance -= amount;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="fn">console.log</span>(<span class="str">`提款成功，餘額：<span class="op">${</span><span class="kw">this</span>.balance<span class="op">}</span>`</span>);<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;} <span class="kw">else</span> { <span class="fn">console.log</span>(<span class="str">"餘額不足"</span>); }<br>
+        &nbsp;&nbsp;}<br>
+        };<br>
+        bankAccount.<span class="fn">withdraw</span>(<span class="num">400</span>);&nbsp;&nbsp;<span class="cm">// 提款成功，餘額：600</span><br>
+        bankAccount.<span class="fn">withdraw</span>(<span class="num">800</span>);&nbsp;&nbsp;<span class="cm">// 餘額不足</span>
+      </div>
+
+      <div class="tech-list">
+        <span class="tech-tag">if/else</span>
+        <span class="tech-tag">for loop</span>
+        <span class="tech-tag">while</span>
+        <span class="tech-tag">function</span>
+        <span class="tech-tag">array</span>
+        <span class="tech-tag">object</span>
+        <span class="tech-tag">JSON</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- HW5 -->
+  <section class="hw" id="hw5">
+    <div class="hw-header">
+      <div class="num">Homework 05</div>
+      <h2>Threads 風格社群平台</h2>
+      <span class="dir">05/blog/</span>
+      <p>使用 Node.js + Express + EJS + SQLite 打造類似 Threads 風格的社群平台，包含多個版本迭代。</p>
+    </div>
+    <div class="hw-body">
+
+      <h4>🛠 使用技術</h4>
+      <div class="tech-list">
+        <span class="tech-tag">Express.js</span>
+        <span class="tech-tag">SQLite (sql.js)</span>
+        <span class="tech-tag">EJS</span>
+        <span class="tech-tag">bcryptjs</span>
+        <span class="tech-tag">express-session</span>
+        <span class="tech-tag">HTML/CSS (Dark)</span>
+      </div>
+
+      <h4>✨ 功能列表</h4>
+      <div class="module-grid">
+        <div class="module-item">註冊／登入／登出</div>
+        <div class="module-item">Session 管理</div>
+        <div class="module-item">發布貼文</div>
+        <div class="module-item">刪除貼文</div>
+        <div class="module-item">公共貼文區</div>
+        <div class="module-item">個人貼文區</div>
+        <div class="module-item">查看他人頁面</div>
+        <div class="module-item">發文數統計</div>
+        <div class="module-item">深色主題 UI</div>
+        <div class="module-item">響應式設計</div>
+      </div>
+
+      <h4>🗺 路由架構</h4>
+      <table class="hw-table">
+        <tr><th>路由</th><th>方法</th><th>說明</th></tr>
+        <tr><td>/</td><td>GET</td><td>首頁（公共貼文區）</td></tr>
+        <tr><td>/my-profile</td><td>GET</td><td>個人貼文區</td></tr>
+        <tr><td>/profile/:id</td><td>GET</td><td>查看特定用戶</td></tr>
+        <tr><td>/register</td><td>GET/POST</td><td>註冊</td></tr>
+        <tr><td>/login</td><td>GET/POST</td><td>登入</td></tr>
+        <tr><td>/logout</td><td>GET</td><td>登出</td></tr>
+        <tr><td>/posts</td><td>POST</td><td>發布貼文</td></tr>
+        <tr><td>/posts/:id/delete</td><td>POST</td><td>刪除貼文</td></tr>
+      </table>
+
+      <h4>🗄 資料庫結構</h4>
+      <div class="code-block">
+        <span class="kw">CREATE TABLE</span> <span class="fn">users</span> (<br>
+        &nbsp;&nbsp;id <span class="kw">INTEGER PRIMARY KEY AUTOINCREMENT</span>,<br>
+        &nbsp;&nbsp;username <span class="kw">TEXT UNIQUE NOT NULL</span>,<br>
+        &nbsp;&nbsp;password <span class="kw">TEXT NOT NULL</span>,<br>
+        &nbsp;&nbsp;bio <span class="kw">TEXT DEFAULT</span> <span class="str">''</span>,<br>
+        &nbsp;&nbsp;created_at <span class="kw">DATETIME DEFAULT CURRENT_TIMESTAMP</span><br>
+        );<br><br>
+        <span class="kw">CREATE TABLE</span> <span class="fn">posts</span> (<br>
+        &nbsp;&nbsp;id <span class="kw">INTEGER PRIMARY KEY AUTOINCREMENT</span>,<br>
+        &nbsp;&nbsp;user_id <span class="kw">INTEGER NOT NULL</span>,<br>
+        &nbsp;&nbsp;content <span class="kw">TEXT NOT NULL</span>,<br>
+        &nbsp;&nbsp;likes <span class="kw">INTEGER DEFAULT</span> <span class="num">0</span>,<br>
+        &nbsp;&nbsp;created_at <span class="kw">DATETIME DEFAULT CURRENT_TIMESTAMP</span>,<br>
+        &nbsp;&nbsp;<span class="kw">FOREIGN KEY</span> (user_id) <span class="kw">REFERENCES</span> users(id)<br>
+        );
+      </div>
+
+      <h4>🐛 開發問題修復</h4>
+      <ul class="issue-list">
+        <li><strong>問題：</strong> 資料庫初始化每次都重建 &nbsp;<span class="arrow">→</span> 改用 <code>IF NOT EXISTS</code> 保留舊資料</li>
+        <li><strong>問題：</strong> 個人頁面無法訪問 &nbsp;<span class="arrow">→</span> 改用 <code>req.session.userId</code></li>
+        <li><strong>問題：</strong> <code>author_name</code> 為 undefined &nbsp;<span class="arrow">→</span> 刪除舊資料庫重新初始化</li>
+        <li><strong>問題：</strong> 發文後公共區看不到自己貼文 &nbsp;<span class="arrow">→</span> 修正 <code>initDB</code> 不再每次刪除資料庫</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- HW6 -->
+  <section class="hw" id="hw6">
+    <div class="hw-header">
+      <div class="num">Homework 06</div>
+      <h2>JavaScript 進階概念練習</h2>
+      <span class="dir">06_new/</span>
+      <p>十題進階練習，涵蓋 Callback、IIFE、map、箭頭函式、自訂 filter、setTimeout、reduce 等。</p>
+    </div>
+    <div class="hw-body">
+
+      <div class="code-block">
+        <span class="cm">// 01 — Callback 函式</span><br>
+        <span class="kw">function</span> <span class="fn">mathTool</span>(num1, num2, action) {<br>
+        &nbsp;&nbsp;<span class="kw">return</span> <span class="fn">action</span>(num1, num2);<br>
+        }<br>
+        <span class="fn">console.log</span>(<span class="fn">mathTool</span>(<span class="num">10</span>, <span class="num">5</span>, <span class="kw">function</span>(a, b) { <span class="kw">return</span> a + b; }));&nbsp;&nbsp;<span class="cm">// 15</span>
+      </div>
+
+      <div class="code-block">
+        <span class="cm">// 02 — IIFE</span><br>
+        (<span class="kw">function</span>() {<br>
+        &nbsp;&nbsp;<span class="kw">let</span> count = <span class="num">100</span>;<br>
+        &nbsp;&nbsp;<span class="fn">console.log</span>(<span class="str">"Count is: "</span> + count);<br>
+        })();
+      </div>
+
+      <div class="code-block">
+        <span class="cm">// 03 — map()</span><br>
+        <span class="kw">const</span> prices = [<span class="num">100</span>, <span class="num">200</span>, <span class="num">300</span>, <span class="num">400</span>];<br>
+        <span class="kw">const</span> discounted = prices.<span class="fn">map</span>(p =&gt; p * <span class="num">0.8</span>);<br>
+        <span class="fn">console.log</span>(discounted);&nbsp;&nbsp;<span class="cm">// [80, 160, 240, 320]</span>
+      </div>
+
+      <div class="code-block">
+        <span class="cm">// 05 — 高階函式</span><br>
+        <span class="kw">const</span> <span class="fn">multiplier</span> = (factor) =&gt; (n) =&gt; n * factor;<br>
+        <span class="kw">const</span> double = <span class="fn">multiplier</span>(<span class="num">2</span>);<br>
+        <span class="fn">console.log</span>(<span class="fn">double</span>(<span class="num">10</span>));&nbsp;&nbsp;<span class="cm">// 20</span>
+      </div>
+
+      <div class="code-block">
+        <span class="cm">// 10 — reduce + Callback</span><br>
+        <span class="kw">function</span> <span class="fn">calculateTotal</span>(cart, discountFunc) {<br>
+        &nbsp;&nbsp;<span class="kw">const</span> total = cart.<span class="fn">reduce</span>((sum, price) =&gt; sum + price, <span class="num">0</span>);<br>
+        &nbsp;&nbsp;<span class="kw">return</span> <span class="fn">discountFunc</span>(total);<br>
+        }<br>
+        <span class="fn">console.log</span>(<span class="fn">calculateTotal</span>([<span class="num">100</span>, <span class="num">200</span>, <span class="num">300</span>], total =&gt; total - <span class="num">50</span>));&nbsp;&nbsp;<span class="cm">// 550</span>
+      </div>
+
+      <div class="tech-list">
+        <span class="tech-tag">Callback</span>
+        <span class="tech-tag">IIFE</span>
+        <span class="tech-tag">map</span>
+        <span class="tech-tag">filter</span>
+        <span class="tech-tag">reduce</span>
+        <span class="tech-tag">Arrow Function</span>
+        <span class="tech-tag">setTimeout</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- HW7 -->
+  <section class="hw" id="hw7">
+    <div class="hw-header">
+      <div class="num">Homework 07</div>
+      <h2>JavaScript 實戰練習</h2>
+      <span class="dir">07/</span>
+      <p>十題實戰練習：物件操作、解構賦值、forEach、動態鍵值、Callback 模擬資料庫、JSON 解析、模板字串、map、權限控制。</p>
+    </div>
+    <div class="hw-body">
+
+      <div class="code-block">
+        <span class="cm">// 01 — 物件屬性存取</span><br>
+        <span class="kw">const</span> post = { id: <span class="num">1</span>, title: <span class="str">"Hello World"</span>, content: <span class="str">"Markdown content"</span> };<br>
+        <span class="fn">console.log</span>(post.title);&nbsp;&nbsp;<span class="cm">// Hello World</span><br>
+        <span class="fn">console.log</span>(post[<span class="str">"title"</span>]);&nbsp;&nbsp;<span class="cm">// Hello World</span>
+      </div>
+
+      <div class="code-block">
+        <span class="cm">// 02 — 解構賦值</span><br>
+        <span class="kw">const</span> req = { body: { title: <span class="str">"JS教學"</span>, content: <span class="str">"內容在此"</span> } };<br>
+        <span class="kw">const</span> { title, content } = req.body;
+      </div>
+
+      <div class="code-block">
+        <span class="cm">// 05 — Callback 模擬資料庫查詢</span><br>
+        <span class="kw">function</span> <span class="fn">fetchData</span>(id, callback) {<br>
+        &nbsp;&nbsp;callback(<span class="kw">null</span>, { id, status: <span class="str">"success"</span> });<br>
+        }<br>
+        <span class="fn">fetchData</span>(<span class="num">101</span>, (err, data) =&gt; {<br>
+        &nbsp;&nbsp;<span class="kw">if</span> (err) <span class="fn">console.log</span>(<span class="str">"發生錯誤："</span> + err);<br>
+        &nbsp;&nbsp;<span class="kw">else</span> <span class="fn">console.log</span>(<span class="str">"成功取得資料："</span>, data);<br>
+        });
+      </div>
+
+      <div class="code-block">
+        <span class="cm">// 08 — 字串樣板 + 三元</span><br>
+        <span class="kw">const</span> user = <span class="str">"Guest"</span>;<br>
+        <span class="kw">const</span> html = <span class="str">`&lt;h1&gt;Welcome, <span class="op">${</span>user ? user : <span class="str">"Stranger"</span><span class="op">}</span>&lt;/h1&gt;`</span>;<br>
+        <span class="fn">console.log</span>(html);&nbsp;&nbsp;<span class="cm">// &lt;h1&gt;Welcome, Guest&lt;/h1&gt;</span>
+      </div>
+
+      <div class="code-block">
+        <span class="cm">// 10 — 權限控制</span><br>
+        <span class="kw">function</span> <span class="fn">checkAdmin</span>(role, callback) {<br>
+        &nbsp;&nbsp;<span class="kw">if</span> (role !== <span class="str">"admin"</span>) { callback(<span class="str">"Access Denied"</span>); <span class="kw">return</span>; }<br>
+        &nbsp;&nbsp;callback(<span class="kw">null</span>, <span class="str">"Welcome"</span>);<br>
+        }<br>
+        <span class="fn">checkAdmin</span>(<span class="str">"admin"</span>, (err, msg) =&gt; <span class="fn">console.log</span>(msg));&nbsp;&nbsp;<span class="cm">// Welcome</span>
+      </div>
+
+      <div class="tech-list">
+        <span class="tech-tag">Object</span>
+        <span class="tech-tag">Destructuring</span>
+        <span class="tech-tag">forEach</span>
+        <span class="tech-tag">Callback</span>
+        <span class="tech-tag">JSON.parse</span>
+        <span class="tech-tag">Template Literals</span>
+        <span class="tech-tag">map</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- HW8 -->
+  <section class="hw" id="hw8">
+    <div class="hw-header">
+      <div class="num">Homework 08</div>
+      <h2>Node.js 購物車網站</h2>
+      <span class="dir">08/shop_project/</span>
+      <p>使用原生 Node.js http 模組建立的購物網站（期中專案）。</p>
+    </div>
+    <div class="hw-body">
+
+      <h4>📁 專案架構</h4>
+      <div class="code-block">
+        <span class="tag">08/shop_project/</span><br>
+        ├── <span class="fn">server.js</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cm"># Node.js 伺服器主程式</span><br>
+        ├── <span class="fn">index.html</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cm"># 商場首頁（商品列表）</span><br>
+        ├── <span class="fn">cart.html</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cm"># 購物車詳細頁面</span><br>
+        ├── <span class="fn">style.css</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cm"># 樣式表</span><br>
+        ├── <span class="fn">script.js</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cm"># 前端互動邏輯</span><br>
+        ├── <span class="fn">note.md</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cm"># 學習筆記</span><br>
+        ├── <span class="fn">README.md</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cm"># 專案說明</span><br>
+        └── <span class="tag">public/images/</span>&nbsp;&nbsp;<span class="cm"># 商品圖檔</span>
+      </div>
+
+      <h4>✨ 功能</h4>
+      <div class="module-grid">
+        <div class="module-item">側面滑入選單</div>
+        <div class="module-item">商品分類篩選</div>
+        <div class="module-item">註冊／登入／登出</div>
+        <div class="module-item">加入購物車</div>
+        <div class="module-item">結帳清單（含刪除）</div>
+        <div class="module-item">圖片放大 Modal</div>
+      </div>
+
+      <h4>🛠 使用技術</h4>
+      <div class="tech-list">
+        <span class="tech-tag">Node.js http</span>
+        <span class="tech-tag">fs / path</span>
+        <span class="tech-tag">HTML5</span>
+        <span class="tech-tag">CSS3 Grid</span>
+        <span class="tech-tag">Vanilla JS ES6</span>
+        <span class="tech-tag">fetch API</span>
+        <span class="tech-tag">LocalStorage</span>
+      </div>
+
+      <h4>🐛 開發問題修正</h4>
+      <ul class="issue-list">
+        <li><strong>問題 1：</strong> cart.html 包含 index.html 完整程式碼，重複 html/head/body 標籤 &nbsp;<span class="arrow">→</span> 清空多餘程式碼，確保獨立結構</li>
+        <li><strong>問題 2：</strong> 用 <code>startsWith("/")</code> 判斷路由且順序太前面，導致所有請求誤判 &nbsp;<span class="arrow">→</span> 遵循「精確匹配優先、通用規則置後」原則調整路由順序</li>
+      </ul>
+
+      <h4>✅ 修正後路由順序</h4>
+      <ol style="margin-left: 20px; color: #555; font-size: 0.9rem;">
+        <li>精確路徑：<code>/</code>、<code>/index.html</code>、<code>/cart.html</code></li>
+        <li>特定目錄：<code>/images/*</code></li>
+        <li>通用資源：<code>.css</code>、<code>.js</code>（依副檔名）</li>
+        <li>最後防線：404 頁面</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Bottom Nav -->
+  <div class="bottom-nav">
+    <a href="../index.html">← 回作業總覽</a>
+    <a href="https://github.com/cyhua7/_wp/tree/master/homework">GitHub 原始碼 ↗</a>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 陳宥驊 · 國立金門大學資訊工程系</p>
+  </footer>
+</div>
+</body>
+</html>
